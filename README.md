@@ -18,26 +18,26 @@
 
 ```mermaid
 graph TB
-    subgraph "前端 (Next.js + React)"
-        A[首页 - 选择采访者] --> B[采访页 - 对话界面]
-        B --> C[杂志页 - 文章展示]
+    subgraph Frontend["前端 (Next.js + React)"]
+        A["首页 - 选择采访者"] --> B["采访页 - 对话界面"]
+        B --> C["杂志页 - 文章展示"]
     end
 
-    subgraph "后端 API Routes"
-        D[/api/interview/start - 开场白]
-        E[/api/interview/chat - 对话]
-        F[/api/interview/generate-article - 生成文章]
-        G[/api/asr - 语音识别]
+    subgraph API["后端 API Routes"]
+        D["interview/start - 开场白"]
+        E["interview/chat - 对话"]
+        F["interview/generate-article - 生成文章"]
+        G["asr - 语音识别"]
     end
 
-    subgraph "Agent 系统"
-        H[Director Agent<br/>对话分析 · 策略建议]
-        I[Persona Agent<br/>人格化采访 · 生成回复]
+    subgraph Agents["Agent 系统"]
+        H["Director Agent<br/>对话分析 · 策略建议"]
+        I["Persona Agent<br/>人格化采访 · 生成回复"]
     end
 
-    subgraph "外部服务"
-        J[DeepSeek / OpenAI<br/>LLM API]
-        K[硅基流动<br/>ASR API]
+    subgraph External["外部服务"]
+        J["DeepSeek / OpenAI<br/>LLM API"]
+        K["硅基流动<br/>ASR API"]
     end
 
     B --> D
