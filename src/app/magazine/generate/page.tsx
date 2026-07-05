@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { ChatMessage } from "@/lib/types";
 
@@ -8,6 +9,7 @@ import type { ChatMessage } from "@/lib/types";
 type PageStatus = "preparing" | "insufficient" | "streaming" | "done" | "error";
 
 function GenerateArticleContent() {
+  const router = useRouter();
   const [status, setStatus] = useState<PageStatus>("preparing");
   const [article, setArticle] = useState("");
   const [sessionDate, setSessionDate] = useState("");
@@ -213,7 +215,7 @@ function GenerateArticleContent() {
                 <button
                   onClick={() => {
                     sessionStorage.setItem("wetales:resume-interview", "true");
-                    window.location.href = "/interview";
+                    router.push("/interview");
                   }}
                   className="text-sm text-secondary hover:text-primary transition-colors font-semibold"
                 >
