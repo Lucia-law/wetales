@@ -1,5 +1,3 @@
 {
-  "buildCommand": "cd wetales-app && npm run build",
-  "outputDirectory": "wetales-app/.next",
-  "installCommand": "cd wetales-app && npm install"
+  "rootDirectory": "wetales-app"
 }
