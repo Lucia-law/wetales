@@ -106,3 +106,20 @@ export async function streamChat(
 
   return full;
 }
+
+/**
+ * 非流式调用 LLM，返回完整文本。
+ * 用于 Director Agent、Theme Planner、Reviewer 等需要完整 JSON 输出的场景。
+ */
+export async function chatSync(params: StreamChatParams): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let result = "";
+    streamChat(params, {
+      onToken: (token) => {
+        result += token;
+      },
+      onDone: () => resolve(result),
+      onError: (err) => reject(err),
+    }).catch(reject);
+  });
+}

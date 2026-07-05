@@ -209,7 +209,16 @@ function GenerateArticleContent() {
                 </p>
               </div>
 
-              <div className="max-w-5xl mx-auto mt-24 text-center">
+              <div className="max-w-5xl mx-auto mt-24 flex justify-between">
+                <button
+                  onClick={() => {
+                    sessionStorage.setItem("wetales:resume-interview", "true");
+                    window.location.href = "/interview";
+                  }}
+                  className="text-sm text-secondary hover:text-primary transition-colors font-semibold"
+                >
+                  Resume Interview
+                </button>
                 <Link
                   href="/"
                   className="text-sm text-secondary hover:text-primary transition-colors font-semibold"
