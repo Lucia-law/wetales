@@ -19,36 +19,50 @@
 ```mermaid
 graph TB
     subgraph Frontend["前端 (Next.js + React)"]
-        A["首页 - 选择采访者"] --> B["采访页 - 对话界面"]
-        B --> C["杂志页 - 文章展示"]
+        A["首页 - 选择采访者"]
+        B["采访页 - 对话界面"]
+        C["杂志页 - 文章展示"]
     end
 
-    subgraph API["后端 API Routes"]
+    subgraph InterviewFlow["采访流程"]
         D["interview/start - 开场白"]
         E["interview/chat - 对话"]
-        F["interview/generate-article - 生成文章"]
-        G["asr - 语音识别"]
+        F["asr - 语音识别"]
+        G["Director Agent<br/>对话分析 · 策略建议"]
+        H["Persona Agent<br/>人格化采访 · 生成回复"]
     end
 
-    subgraph Agents["Agent 系统"]
-        H["Director Agent<br/>对话分析 · 策略建议"]
-        I["Persona Agent<br/>人格化采访 · 生成回复"]
+    subgraph ArticleFlow["文章生成流程"]
+        I["interview/generate-article"]
+        J["信息提取<br/>提取人物、故事、场景、金句"]
+        K{"素材充分性判断"}
+        L["文章生成<br/>杂志风格输出"]
+        M["返回 insufficient<br/>信息量不足"]
     end
 
     subgraph External["外部服务"]
-        J["DeepSeek / OpenAI<br/>LLM API"]
-        K["硅基流动<br/>ASR API"]
+        N["DeepSeek / OpenAI<br/>LLM API"]
+        O["硅基流动<br/>ASR API"]
     end
 
+    A --> B
     B --> D
     B --> E
     B --> F
-    B --> G
+    E --> G
     E --> H
-    E --> I
-    H --> J
+    G --> N
+    H --> N
+    F --> O
+    B -->|"结束采访"| I
     I --> J
-    G --> K
+    J --> N
+    J --> K
+    K -->|"充分"| L
+    K -->|"不足"| M
+    L --> N
+    L --> C
+    M -->|"Resume Interview"| B
 ```
 
 ### Agent 协作流程
